@@ -48,7 +48,32 @@ body{
 .paleta{
   display: none;
 }
-
+.colores{
+  display: flex;
+  margin: 10% auto auto auto;
+  width: 80%;
+  height: 30px;
+  border: solid 1px white;
+}
+.color{
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  border: solid 1px white;
+  /* float: left; */
+  cursor: pointer;
+  margin: 2px 5px auto 5px;
+}
+.color #negro{background-color: black;}
+.color #blanco{background-color: white;}
+.color #rosa{background-color: "#fbb6d3";}
+.color #azul{background-color: "#6eb7d7";}
+.color #rojo{background-color: "#f26866";}
+.color #verde{background-color: "#86ca5d";}
+.color #amarillo{background-color: "#ffed51";}
+.color #marron{background-color: "#c0ba98";}
+.color #naranja{background-color: "#fcaa85";}
+.color #violeta{background-color: "#a58ac1";}
 /* --------- FILTROS --------- */
 .filtros{
   display: none;

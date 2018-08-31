@@ -108,9 +108,21 @@ imagen_ejemplo.src = 'img-ejemplo.jpg'; // ruta de la img (aca tomar el valor de
 //ejecuta solo cuando la img esta cargada para dibujarla en el canvas principal
 imagen_ejemplo.onload = function(){
   //cargo las imgs por defecto
-  dibujarImg(ctx,this);
-  dibujarImg(ctxNoEditable,this);
+  // dibujarImg(ctx,this);
+  // dibujarImg(ctxNoEditable,this);
   var imgNoEditable = ctxNoEditable.getImageData(0, 0, this.width, this.height);
+
+  var relacion = this.width/this.height;
+  if (canvasMain.width > canvasMain.height) {
+    dibujarImg(ctx, this, canvasMain.width, Math.round(canvasMain.height/(relacion)));
+  }else{
+    dibujarImg(ctx, this, Math.round(canvasMain.height*relacion), canvasMain.height);
+  }
+// relacion = w1 / h1
+//   si (w2 > h2)
+//     d1 (i 0 0 w2 w2/relacion)
+//   si no
+//     di (i 0 0 h2*relacion, h2)
 
   //agrega el evento de ser clickeable a cafa canvas de filtro
   //hacer una uncica funcion y no repetir el codigo
@@ -140,8 +152,9 @@ imagen_ejemplo.onload = function(){
 }
 
 //dibuja la imagen dada, ajustandola al tamaño del canvas dado
-function dibujarImg(contexto, imagen){
-  contexto.drawImage(imagen,0,0,contexto.canvas.width,contexto.canvas.height); // hacer el reescalado a mano para no perder calidad
+function dibujarImg(contexto, imagen, x,y){
+  // contexto.drawImage(imagen,0,0,contexto.canvas.width,contexto.canvas.height); // hacer el reescalado a mano para no perder calidad
+  contexto.drawImage(imagen,0,0,x,y);
 }
 //recorre el canvas q se le pasan,
 //y dependiendo el tipo de filtro q se le quiera aplicar,
