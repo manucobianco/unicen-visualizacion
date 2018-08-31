@@ -1,17 +1,17 @@
-/* BODY */
+/* --------- BODY --------- */
 body{
   background-color: rgb(26, 5, 87);
   margin: 0px;
 }
 
-/* NAV */
+/* --------- NAV --------- */
 .nav{
   width: 100%;
   height: 60px;
   border:solid 1px white;
   background-color: #383842;
 }
-/* MENU */
+/* --------- MENU --------- */
 .menu{
   width: 10%;
   height: 900px;
@@ -35,7 +35,7 @@ body{
   font-size: 20px;
 }
 
-/* PANEL */
+/* --------- PANEL --------- */
 .panel{
   width: 30%;
   height: 900px;
@@ -44,12 +44,12 @@ body{
   background-color: #33333b;
 }
 
-/* PALETA */
+/* --------- PALETA --------- */
 .paleta{
   display: none;
 }
 
-/* FILTROS */
+/* --------- FILTROS --------- */
 .filtros{
   display: none;
 }
@@ -60,7 +60,7 @@ body{
   display: block;
   margin: 5px auto 10px auto;
 }
-/* CANVAS */
+/* --------- CANVAS --------- */
 .canvas{
   width: 59%;
   height: 900px;

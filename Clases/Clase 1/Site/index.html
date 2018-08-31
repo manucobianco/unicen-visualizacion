@@ -6,14 +6,19 @@
     <title>TOPH Paint</title>
   </head>
   <body>
+    <!-- El nav general de la pag -->
     <div class="nav">
 
     </div>
+    <!-- Menu lateral izquierdo donde se puede elegir que region mostrar en el 'panel' -->
     <div class="menu">
       <div class="menuButton" id="filtrosButton">Filtros</div>
       <div class="menuButton" id="paintButton">Paint</div>
     </div>
+    <!-- Panel donde se muestran las opciones tanto del pain, como de los filtros. -->
+    <!-- Dichas regiones se van mostrando dependiendo de lo que se clicke en la region de menu. -->
     <div class="panel">
+      <!-- Region donde se muestran los mini canvas q tiene los filtros a aplicar al canvas general -->
       <div class="filtros" id="filtros">
         <canvas class="canvansFiltros" id="filtroGris"></canvas>
         <canvas class="canvansFiltros" id="filtroSepia"></canvas>
@@ -24,10 +29,12 @@
         <canvas class="canvansFiltros" id="filtroSaturacion"></canvas>
         <!-- <input type="range"  oninput="console.log(this.value);" name="points" id="points" value="0" min="-200" max="200"> -->
       </div>
+      <!-- Region donde se muestran las herramientas que tiene el paint -->
       <div class="paleta" id="paleta">
 
       </div>
     </div>
+    <!-- Pantalla donde va el canvas principal. Dicho canvas es donde todas las interacciones se muetran -->
     <div class="canvas">
       <canvas id="canvasMain"></canvas>
     </div>
