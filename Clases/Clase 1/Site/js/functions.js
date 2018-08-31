@@ -205,6 +205,12 @@ function pintarPixel (imageData,tipo,contexto){
           // -1 | 0 | 1
 
           // blur es la misma matriz pero con 1/9 en casa pos
+
+          // for x
+          //   for y
+          //     for k = x-1; k<x+1; k++
+          //       for l = y-1; l<y+1; l++
+          // carga el valor de "acumulador"
       }
     }
   }
