@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>TOPH Paint</title>
+  </head>
+  <body>
+    <div class="nav">
+
+    </div>
+    <div class="menu">
+      <div class="menuButton" id="filtrosButton">Filtros</div>
+      <div class="menuButton" id="paintButton">Paint</div>
+    </div>
+    <div class="panel">
+      <div class="filtros" id="filtros">
+        <canvas class="canvansFiltros" id="filtroGris"></canvas>
+        <canvas class="canvansFiltros" id="filtroSepia"></canvas>
+        <canvas class="canvansFiltros" id="filtroNegativo"></canvas>
+        <canvas class="canvansFiltros" id="filtroBinario"></canvas>
+        <canvas class="canvansFiltros" id="filtroBrillo"></canvas>
+        <canvas class="canvansFiltros" id="filtroDesenfoque"></canvas>
+        <canvas class="canvansFiltros" id="filtroSaturacion"></canvas>
+        <!-- <input type="range"  oninput="console.log(this.value);" name="points" id="points" value="0" min="-200" max="200"> -->
+      </div>
+      <div class="paleta" id="paleta">
+
+      </div>
+    </div>
+    <div class="canvas">
+      <canvas id="canvasMain"></canvas>
+    </div>
+  </body>
+  <script src="js/functions.js"></script>
+</html>

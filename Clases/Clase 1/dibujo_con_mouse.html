@@ -1,0 +1,74 @@
+<canvas id="canvas" width="900" onmousemove="setPixelConMouse(event);" height="600" style="border:#000 solid 1px;margin-left:auto;margin-right:auto;display:block;"></canvas>
+
+<script type="text/javascript">
+  var ctx = document.getElementById("canvas").getContext("2d");
+  var canvas = document.getElementById("canvas");
+  var imagen = ctx.createImageData(canvas.width,canvas.height);
+  var xAnterior = 0;
+  var yAnterior = 0;
+
+  var mouseDown = 0;
+  document.body.onmousedown = function(e) {
+    xAnterior = e.layerX;
+    yAnterior = e.layerY;
+    mouseDown = 1;
+  }
+  document.body.onmouseup = function(e) {
+    xAnterior = e.layerX;
+    yAnterior = e.layerY;
+    mouseDown = 0;
+  }
+
+
+  // function setPixelConMouse(e){
+  //   if(mouseDown == 1){
+  //     x = e.layerX; // clientX/Y y layerX/Y
+  //     y = e.layerY; // clientX/Y y layerX/Y
+  //     for (var i = x-3; i < x+3; i++) {
+  //       for (var j = y-3; j < y+3; j++) {
+  //         setPixel (imagen,i,j,255.3,67,242);
+  //         ctx.putImageData(imagen,0,0);
+  //       }
+  //     }
+  //   }
+  // }
+
+  function setPixelConMouse(e){
+    if(mouseDown == 1){
+      x = e.layerX; // clientX/Y y layerX/Y
+      y = e.layerY; // clientX/Y y layerX/Y
+      ctx.beginPath();
+      ctx.moveTo(xAnterior, yAnterior);
+      ctx.lineTo(x, y);
+      ctx.lineWidth = 20;
+      ctx.strokeStyle = "rgb(246, 111, 245)";
+      ctx.stroke();
+      xAnterior = x;
+      yAnterior = y;
+    }
+  }
+
+  function setPixel(imagenData,x,y,r,g,b){
+    index = (x + y * imagenData.width) * 4;
+    imagenData.data[index] = r;
+    imagenData.data[index+1] = g;
+    imagenData.data[index+2] = b;
+    imagenData.data[index+3] = 255;
+  }
+
+// si tengo un punto
+//   beginpath
+//   move to xAnterior // ver si es desde aca a \l anterior
+//   line to nueva
+//   stroke para dubijar en canvas
+//   close path
+
+// guardar pos acttual
+// on soltar click desactivar el btn anterior
+
+// https://gist.github.com/6174/9403745
+// https://medium.com/@yonem9/pintando-con-el-canvas-javascript-573e4951b61a
+// http://www.etnassoft.com/2016/11/03/manipulacion-de-imagenes-con-javascript-parte-1/
+// https://es.stackoverflow.com/questions/72029/c%C3%B3mo-cambiar-el-color-de-fondo-de-una-celda-compar%C3%A1ndolo-con-la-fecha-actual
+// https://stackoverflow.com/questions/854772/onclick-without-jquery
+</script>

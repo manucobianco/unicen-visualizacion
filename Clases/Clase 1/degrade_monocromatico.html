@@ -1,0 +1,31 @@
+<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;margin-left:auto;margin-right:auto;display:block;"></canvas>
+
+<script type="text/javascript">
+  var ctx = document.getElementById("canvas").getContext("2d");
+  var canvas = document.getElementById("canvas");
+
+  var imagen = ctx.createImageData(canvas.width,canvas.height);
+
+  function cargarImg(){
+    for (var i = 0; i < imagen.width; i++) {
+      for (var j = 0; j < imagen.height; j++) {
+        // Para hacerlo en vertical, se usa el eje J y se divide por el height
+        setPixel (imagen,i,j,0 + (j * (255/imagen.height)),0 + (j * (255/imagen.height)),0 + (j * (255/imagen.height)));
+        // Para hacerlo  en horizontal, se usa el eje I y se divide por el width
+        setPixel (imagen,i,j,0 + (i * (255/imagen.width)),0 + (i * (255/imagen.width)),0 + (i * (255/imagen.width)));
+      }
+    }
+    ctx.putImageData(imagen,0,0);
+  }
+
+  cargarImg();
+
+  function setPixel(imagenData,x,y,r,g,b){
+    index = (x + y * imagenData.width) * 4;
+    imagenData.data[index] = r;
+    imagenData.data[index+1] = g;
+    imagenData.data[index+2] = b;
+    imagenData.data[index+3] = 255;
+  }
+
+</script>

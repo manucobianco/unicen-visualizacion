@@ -4,16 +4,21 @@ var ctx2 = document.getElementById("canvas2").getContext("2d");
 var ctx3 = document.getElementById("canvas3").getContext("2d");
 var ctx4 = document.getElementById("canvas4").getContext("2d");
 var ctx5 = document.getElementById("canvas5").getContext("2d");
+var ctx6 = document.getElementById("canvas6").getContext("2d");
+var ctx7 = document.getElementById("canvas7").getContext("2d");
 
 imagen_ejemplo.src = 'img-ejemplo.jpg';
 
 imagen_ejemplo.onload = function(){
   dibujarImg(this);
   var img = ctx.getImageData(0, 0, this.width, this.height);
-  pintarPixel(img,1,ctx2); // NEGATIVO
-  pintarPixel(img,2,ctx3); // ESCALA DE NEGROS
-  pintarPixel(img,3,ctx4); // SEPIA3
-  pintarPixel(img,4,ctx5); // BINARIZACION
+
+  // pintarPixel(img,1,ctx2); // NEGATIVO
+  // pintarPixel(img,2,ctx3); // ESCALA DE NEGROS
+  // pintarPixel(img,3,ctx4); // SEPIA
+  // pintarPixel(img,4,ctx5); // BINARIZACION
+  // pintarPixel(img,5,ctx6); // BRILLO
+  pintarPixel(img,6,ctx7); // DESENFOQUE
 }
 
 function pintarPixel (imageData,tipo,contexto){
@@ -52,6 +57,17 @@ function pintarPixel (imageData,tipo,contexto){
             imageData.data[index+2] = 255;
           }
         break;
+        case 5: // BRILLO
+          var brillo_actual = document.getElementById("points").value;
+          imageData.data[index+0] = imageData.data[index+0] + brillo_actual; //rojo
+          imageData.data[index+1] = imageData.data[index+1] + brillo_actual; //verde
+          imageData.data[index+2] = imageData.data[index+2] + brillo_actual; //azul
+        break;
+        case 6: // DESENFOQUE
+          imageData.data[index+0] = imageData.data[index+0];
+          imageData.data[index+1] = imageData.data[index+1];
+          imageData.data[index+2] = imageData.data[index+2];
+        break;
       }
     }
   }
@@ -66,3 +82,17 @@ function getRed(imageData,x,y){
   index = (x + y * imageData.width) * 4;
   return imageData.data[index+0]; //ese + nro condiciona el color
 }
+
+// manucobianco/github.io/asdasd
+// gh-pages
+
+
+// desenfoque: agarras un pixel y lo multiplicas o sumas por 0.5 de lo q tenes a tus lados
+// deteccion de borders
+// suavisado
+// saturacion
+//guardar imgLogo//
+//lapiz , goma, tamaños de  la linea, colores
+
+// fillrect para linea de canvas
+    // es para no perder trazo entre los puntos.
