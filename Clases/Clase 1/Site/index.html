@@ -8,7 +8,7 @@
   <body>
     <!-- El nav general de la pag -->
     <div class="nav">
-
+      <input type="file" id="file-input">
     </div>
     <!-- Menu lateral izquierdo donde se puede elegir que region mostrar en el 'panel' -->
     <div class="menu">
@@ -20,13 +20,13 @@
     <div class="panel">
       <!-- Region donde se muestran los mini canvas q tiene los filtros a aplicar al canvas general -->
       <div class="filtros" id="filtros">
+        <canvas class="canvansFiltros" id="filtroNegativo"></canvas>
         <canvas class="canvansFiltros" id="filtroGris"></canvas>
         <canvas class="canvansFiltros" id="filtroSepia"></canvas>
-        <canvas class="canvansFiltros" id="filtroNegativo"></canvas>
         <canvas class="canvansFiltros" id="filtroBinario"></canvas>
         <canvas class="canvansFiltros" id="filtroBrillo"></canvas>
-        <canvas class="canvansFiltros" id="filtroDesenfoque"></canvas>
-        <canvas class="canvansFiltros" id="filtroSaturacion"></canvas>
+        <!-- <canvas class="canvansFiltros" id="filtroDesenfoque"></canvas> -->
+        <!-- <canvas class="canvansFiltros" id="filtroSaturacion"></canvas> -->
         <!-- <input type="range"  oninput="console.log(this.value);" name="points" id="points" value="0" min="-200" max="200"> -->
       </div>
       <!-- Region donde se muestran las herramientas que tiene el paint -->
@@ -37,6 +37,7 @@
     <!-- Pantalla donde va el canvas principal. Dicho canvas es donde todas las interacciones se muetran -->
     <div class="canvas">
       <canvas id="canvasMain"></canvas>
+      <canvas id="canvasNoEditable"></canvas>
     </div>
   </body>
   <script src="js/functions.js"></script>

@@ -80,22 +80,63 @@ var ctxSaturacion = document.getElementById("filtroSaturacion").getContext("2d")
 
 // --------- CANVASMAIN --------- //
 var imagen_ejemplo = new Image();
+var ctxNoEditable = document.getElementById("canvasNoEditable").getContext("2d");
 var canvasMain = document.getElementById("canvasMain");
 var ctx = canvasMain.getContext("2d");
 
 imagen_ejemplo.src = 'img-ejemplo.jpg'; // ruta de la img (aca tomar el valor de lo q suba el usuario)
+//load de imagenes con input
+// document.getElementById('file-input').addEventListener("input", function (e) {
+//   var file = e.target.files[0],
+//       imageType = /image.*/;
+//
+//   if (!file.type.match(imageType))
+//       return;
+//
+//   var reader = new FileReader();
+//   reader.onload = fileOnLoad(e);
+//   reader.readAsDataURL(file);
+// });
+// function fileOnload(e) {
+//   img = new Image();
+//     img.src = e.target.result;
+//     img.onload = function() {
+//       alert(cargo);
+//     }
+// }
+
 //ejecuta solo cuando la img esta cargada para dibujarla en el canvas principal
 imagen_ejemplo.onload = function(){
+  //cargo las imgs por defecto
   dibujarImg(ctx,this);
-  var img = ctx.getImageData(0, 0, this.width, this.height);
+  dibujarImg(ctxNoEditable,this);
+  var imgNoEditable = ctxNoEditable.getImageData(0, 0, this.width, this.height);
+
+  //agrega el evento de ser clickeable a cafa canvas de filtro
+  //hacer una uncica funcion y no repetir el codigo
+  document.getElementById("filtroNegativo").addEventListener("click", function(){
+    pintarPixel(imgNoEditable,1,ctx);
+  });
+  document.getElementById("filtroGris").addEventListener("click", function(){
+    pintarPixel(imgNoEditable,2,ctx);
+  });
+  document.getElementById("filtroSepia").addEventListener("click", function(){
+    pintarPixel(imgNoEditable,3,ctx);
+  });
+  document.getElementById("filtroBinario").addEventListener("click", function(){
+    pintarPixel(imgNoEditable,4,ctx);
+  });
+  document.getElementById("filtroBrillo").addEventListener("click", function(){
+    pintarPixel(imgNoEditable,5,ctx);
+  });
 
 //pinta los canvas de filtros
-//   pintarPixel(img,1,ctxNegativo); // NEGATIVO
-//   pintarPixel(img,2,ctxGris); // ESCALA DE NEGROS
-//   pintarPixel(img,3,ctxSepia); // SEPIA
-//   pintarPixel(img,4,ctxBinario); // BINARIZACION
-//   pintarPixel(img,5,ctxBrillo); // BRILLO
-//   pintarPixel(img,6,ctx7); // DESENFOQUE
+  pintarPixel(imgNoEditable,1,ctxNegativo); // NEGATIVO
+  pintarPixel(imgNoEditable,2,ctxGris); // ESCALA DE NEGROS
+  pintarPixel(imgNoEditable,3,ctxSepia); // SEPIA
+  pintarPixel(imgNoEditable,4,ctxBinario); // BINARIZACION
+  pintarPixel(imgNoEditable,5,ctxBrillo); // BRILLO
+  // pintarPixel(imgNoEditable,6,ctx7); // DESENFOQUE
 }
 
 //dibuja la imagen dada, ajustandola al tamaño del canvas dado
@@ -151,6 +192,19 @@ function pintarPixel (imageData,tipo,contexto){
           imageData.data[index+1] = imageData.data[index+1];
           imageData.data[index+2] = imageData.data[index+2];
         break;
+        // deteccion de borders
+          // pasamos a gris para saber la luminancia con el escala de grices
+          //te paras en un pixel y preguntas y los lados y los de arribay los de abajo no son muuuy distintos ahi no es borde
+          // imagen[x-1,y] * m[0,1]+
+          // imagen[x+1,y] * m[2,1]
+          // matriz de combolucion
+          // cuenta<0 lo multiplicas por -1
+          //
+          // -1 | 0 | 1
+          // -1 | x | 1
+          // -1 | 0 | 1
+
+          // blur es la misma matriz pero con 1/9 en casa pos
       }
     }
   }
