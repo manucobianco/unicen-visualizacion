@@ -48,10 +48,61 @@ body{
 .paleta{
   display: none;
 }
-.colores{
+.tools{
+  border: solid 1px white;
+  width: 90%;
+  height: 150px;
   display: flex;
   margin: 10% auto auto auto;
-  width: 80%;
+}
+#lapiz, #goma{
+  color: white;
+  display: block;
+  border: solid 1px white;
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  margin-top: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tamaños{
+  color: white;
+  display: inline-grid;
+  border: solid 1px white;
+  border-radius: 5px;
+  width: 50%;
+  height: 100px;
+  margin: 24px auto auto auto;
+}
+.tamaño{
+  color: white;
+  display: block;
+  border: solid 1px white;
+  width: 70%;
+  height: 20px;
+  margin: 8px auto auto auto;
+  cursor: pointer;
+}
+.tamañoShow{
+  background-color: white;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+}
+#tam2{
+  height: 60%;
+  margin-top: 0px;
+}
+#tam1{
+  height: 20%;
+  margin-top: 10px;
+}
+.colores{
+  display: flex;
+  margin: 10px auto auto auto;
+  width: 90%;
   height: 30px;
   border: solid 1px white;
 }
@@ -64,19 +115,19 @@ body{
   cursor: pointer;
   margin: 2px 5px auto 5px;
 }
-.color #negro{background-color: black;}
-.color #blanco{background-color: white;}
-.color #rosa{background-color: "#fbb6d3";}
-.color #azul{background-color: "#6eb7d7";}
-.color #rojo{background-color: "#f26866";}
-.color #verde{background-color: "#86ca5d";}
-.color #amarillo{background-color: "#ffed51";}
-.color #marron{background-color: "#c0ba98";}
-.color #naranja{background-color: "#fcaa85";}
-.color #violeta{background-color: "#a58ac1";}
+.colores #negro{background-color: black;}
+.colores #blanco{background-color: white;}
+.colores #rosa{background-color: #fbb6d3;}
+.colores #azul{background-color: #6eb7d7;}
+.colores #rojo{background-color: #f26866;}
+.colores #verde{background-color: #86ca5d;}
+.colores #amarillo{background-color: #ffed51;}
+.colores #marron{background-color: #c0ba98;}
+.colores #naranja{background-color: #fcaa85;}
+.colores #violeta{background-color: #a58ac1;}
 /* --------- FILTROS --------- */
 .filtros{
-  display: none;
+  /* display: none; */
 }
 .canvansFiltros{
   width: 70%;

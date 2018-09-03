@@ -31,17 +31,38 @@
       </div>
       <!-- Region donde se muestran las herramientas que tiene el paint -->
       <div class="paleta" id="paleta">
+        <div class="tools">
+          <div id="lapiz" onclick="setColorAnterior();">
+            lapiz
+          </div>
+          <div id="goma" onclick="setearColor('#ffffff','g');">
+            goma
+          </div>
+          <div class="tamaños">
+            <div class="tamaño" onclick="setTamaño(2);" id="tam1">
+              <div class="tamañoShow"></div>
+            </div>
+            <div class="tamaño" onclick="setTamaño(5);" id="tam2">
+              <div class="tamañoShow"></div>
+            </div>
+            <div class="tamaño" onclick="setTamaño(10);" id="tam3">
+              <div class="tamañoShow"></div>
+            </div>
+          </div>
+        </div>
         <div class="colores">
-          <div class="color" id="negro"></div>
-          <div class="color" id="blanco"></div>
-          <div class="color" id="rosa"></div>
-          <div class="color" id="azul"></div>
-          <div class="color" id="rojo"></div>
-          <div class="color" id="verde"></div>
-          <div class="color" id="amarillo"></div>
-          <div class="color" id="marron"></div>
-          <div class="color" id="naranja"></div>
-          <div class="color" id="violeta"></div>
+          <div style="display:inline-flex;margin-left:auto;margin-right:auto;">
+            <div class="color" onclick="setearColor('#000000','c');" id="negro"></div>
+            <!-- <div class="color" onclick="setearColor('#ffffff');" id="blanco"></div> -->
+            <div class="color" onclick="setearColor('#fbb6d3','c');" id="rosa"></div>
+            <div class="color" onclick="setearColor('#6eb7d7','c');" id="azul"></div>
+            <div class="color" onclick="setearColor('#f26866','c');" id="rojo"></div>
+            <div class="color" onclick="setearColor('#86ca5d','c');" id="verde"></div>
+            <div class="color" onclick="setearColor('#ffed51','c');" id="amarillo"></div>
+            <div class="color" onclick="setearColor('#c0ba98','c');" id="marron"></div>
+            <div class="color" onclick="setearColor('#fcaa85','c');" id="naranja"></div>
+            <div class="color" onclick="setearColor('#a58ac1','c');" id="violeta"></div>
+          </div>
         </div>
       </div>
     </div>
