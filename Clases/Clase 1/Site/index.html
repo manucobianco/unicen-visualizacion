@@ -9,6 +9,7 @@
     <!-- El nav general de la pag -->
     <div class="nav">
       <input type="file" id="file-input">
+      <a type="button" id="btnDescargar" onclick="descargarImg();" download="imagen.png">Descargar Img</a>
     </div>
     <!-- Menu lateral izquierdo donde se puede elegir que region mostrar en el 'panel' -->
     <div class="menu">
@@ -27,7 +28,6 @@
         <canvas class="canvansFiltros" id="filtroBrillo"></canvas>
         <canvas class="canvansFiltros" id="filtroDesenfoque"></canvas>
         <canvas class="canvansFiltros" id="filtroSaturacion"></canvas>
-        <!-- <input type="range"  oninput="console.log(this.value);" name="points" id="points" value="0" min="-200" max="200"> -->
       </div>
       <!-- Region donde se muestran las herramientas que tiene el paint -->
       <div class="paleta" id="paleta">
@@ -69,6 +69,7 @@
     <!-- Pantalla donde va el canvas principal. Dicho canvas es donde todas las interacciones se muetran -->
     <div class="canvas">
       <canvas id="canvasMain"></canvas>
+      <input type="range" name="points" id="points" value="0" min="-200" max="200">
       <canvas id="canvasNoEditable"></canvas>
     </div>
   </body>
@@ -78,8 +79,6 @@
 <!-- Falta: -->
   <!-- Nav -->
     <!-- Logo -->
-    <!-- Bton subir -->
-    <!-- Bton bajar -->
   <!-- Menu -->
     <!-- Config botones -->
     <!-- Ajustar styles -->
@@ -90,17 +89,11 @@
     <!-- Filtros -->
       <!-- Cargar filtros con la img dada -->
         <!-- No mostrar si no hay una? -->
-      <!-- Clickeables -->
       <!-- Ver de darle estilos on mouse over -->
     <!-- Paleta -->
       <!-- Iconos -->
-      <!-- Borrar -->
-      <!-- Colores de paliz -->
-      <!-- tamaños de goma y lapiz -->
       <!-- ver de hacer formas -->
       <!-- Bton undo!? -->
   <!-- Canvas -->
     <!-- Ver la img por defecto -->
-    <!-- guardar una img en hidden para tomar de ref -->
-    <!-- poder guardar imgs-->
 <!-- Falta Algo mas?! -->
