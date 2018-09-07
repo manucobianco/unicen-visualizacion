@@ -2,6 +2,7 @@
 body{
   background-color: rgb(26, 5, 87);
   margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* --------- NAV --------- */
@@ -10,6 +11,24 @@ body{
   height: 60px;
   border:solid 1px white;
   background-color: #383842;
+}
+#file-input{
+  display: none;
+}
+.btnImagen{
+  display: inline-block;
+  text-align: center;
+  padding: 2px;
+  width: 120px;
+  height: 28px;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 12px 20px auto auto;
+  float: right;
+}
+.btnImagen:hover{
+  box-shadow: 4px 4px #888888;
 }
 /* --------- MENU --------- */
 .menu{
@@ -25,14 +44,14 @@ body{
   height: 30px;
   border-radius: 10px;
   border: solid 1px white;
-  color: white;
+  /* color: white; */
   padding: 5px;
   text-align: center;
   display: block;
-  margin: 5px auto auto 10px;
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px auto 20px auto;
   cursor: pointer;
   font-size: 20px;
+  background-color: white;
 }
 
 .menuButton:hover{
@@ -46,6 +65,7 @@ body{
   border: solid 1px white;
   float: left;
   background-color: #33333b;
+  overflow: auto;
 }
 
 /* --------- PALETA --------- */
@@ -70,11 +90,16 @@ body{
   margin-top: 24px;
   margin-left: auto;
   margin-right: auto;
+  background-color: rgb(246, 242, 242);
+}
+.tools img{
+  width: 98px;
+  height: 98px;
 }
 .tamaños{
   color: white;
   display: inline-grid;
-  border: solid 1px white;
+  /* border: solid 1px white; */
   border-radius: 5px;
   width: 50%;
   height: 100px;
@@ -108,7 +133,7 @@ body{
   margin: 10px auto auto auto;
   width: 90%;
   height: 30px;
-  border: solid 1px white;
+  /* border: solid 1px white; */
 }
 .color{
   width: 20px;
@@ -130,12 +155,12 @@ body{
 .colores #naranja{background-color: #fcaa85;}
 .colores #violeta{background-color: #a58ac1;}
 
-#lapiz:hover,#goma:hover, {
+#lapiz:hover,#goma:hover,.color:hover {
   border: solid 2px yellow;
 }
 /* --------- FILTROS --------- */
 .filtros{
-  /* display: none; */
+  display: none;
 }
 .canvansFiltros{
   width: 70%;
@@ -144,6 +169,20 @@ body{
   display: block;
   margin: 5px auto 10px auto;
   cursor: pointer;
+}
+.canvansFiltros:hover {
+  border: solid 2px yellow;
+}
+.filtros p{
+  text-align: center;
+  color: white;
+  margin-bottom: 1px;
+}
+.filtros hr{
+  color: white;
+  width: 70%;
+  text-align: center;
+  margin-top: 30px;
 }
 /* --------- CANVAS --------- */
 .canvas{
@@ -162,4 +201,29 @@ body{
 }
 #canvasNoEditable{
   display: none;
+}
+#points{
+  display: none;
+  margin: 5% auto auto auto;
+}
+#detectorBordes{
+  display: none;
+  width: 80%;
+  margin: 5% auto auto auto;
+}
+#detectorBordes div{
+  border-radius: 2px;
+  padding: 2px;
+  width: 150px;
+  height: 28px;
+  cursor: pointer;
+  background-color: white;
+  text-align: center;
+  display: inline-block;
+  border-radius: 6px;
+  margin: 0px auto auto 10px;
+}
+
+#detectorBordes div:hover{
+  box-shadow: 4px 4px #888888;
 }

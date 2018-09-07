@@ -1,6 +1,3 @@
-// --------- GENERAL --------- //
-// --------- NAV --------- //
-// --------- MENU --------- //
 // --------- PANEL --------- //
 
 //esconde la region de paletas y muestra la de filtros
@@ -61,7 +58,6 @@ function setPixelConMouse(e){
   if(mouseDown == 1){
     x = getPosX(canvasMain,e);
     y = getPosY(canvasMain,e);
-    console.log(x,y);
     ctx.beginPath();
     ctx.moveTo(xAnterior, yAnterior);
     ctx.lineTo(x, y);
@@ -90,8 +86,7 @@ var ctxGris = document.getElementById("filtroGris").getContext("2d");
 var ctxSepia = document.getElementById("filtroSepia").getContext("2d");
 var ctxBinario = document.getElementById("filtroBinario").getContext("2d");
 var ctxBrillo = document.getElementById("filtroBrillo").getContext("2d");
-var ctxDesemfoque = document.getElementById("filtroDesenfoque").getContext("2d");
-var ctxSaturacion = document.getElementById("filtroSaturacion").getContext("2d");
+var ctxDetBordes = document.getElementById("filtroDeteccionBordes").getContext("2d");
 
 // --------- CANVASMAIN --------- //
 // var imagen_ejemplo = new Image();
@@ -100,9 +95,8 @@ var canvasMain = document.getElementById("canvasMain");
 var ctx = canvasMain.getContext("2d");
 
 // imagen_ejemplo.src = 'img-ejemplo.jpg'; // ruta de la img (aca tomar el valor de lo q suba el usuario)
+
 //load de imagenes con input
-
-
 document.getElementById('file-input').addEventListener("input", function (e) {
   var file = e.target.files[0],
       imageType = /image.*/;
@@ -125,120 +119,148 @@ function fileOnload(e) {
     var img = ctx.getImageData(0, 0, this.width, this.height);
     var imgNoEditable = ctxNoEditable.getImageData(0, 0, this.width, this.height);
 
-
-    //agrega el evento de ser clickeable a cafa canvas de filtro
-    //hacer una uncica funcion y no repetir el codigo
+    //agrega funcionalidad a cada canvas
     document.getElementById("filtroNegativo").addEventListener("click", function(){
+      document.getElementById("points").style.display = "none";
+      document.getElementById("detectorBordes").style.display = "none";
+
       pintarPixel(img,1,ctx,imgNoEditable);
     });
     document.getElementById("filtroGris").addEventListener("click", function(){
+      document.getElementById("points").style.display = "none";
+      document.getElementById("detectorBordes").style.display = "none";
+
       pintarPixel(img,2,ctx,imgNoEditable);
     });
     document.getElementById("filtroSepia").addEventListener("click", function(){
+      document.getElementById("points").style.display = "none";
+      document.getElementById("detectorBordes").style.display = "none";
+
       pintarPixel(img,3,ctx,imgNoEditable);
     });
     document.getElementById("filtroBinario").addEventListener("click", function(){
+      document.getElementById("points").style.display = "none";
+      document.getElementById("detectorBordes").style.display = "none";
+
       pintarPixel(img,4,ctx,imgNoEditable);
     });
     document.getElementById("filtroBrillo").addEventListener("click", function(){
       pintarPixel(img,5,ctx,imgNoEditable);
+      document.getElementById("points").style.display = "block";
+      document.getElementById("detectorBordes").style.display = "none";
+
     });
-    // document.getElementById("points").addEventListener("input", function(){
     document.getElementById("points").addEventListener("input", function(){
       pintarPixel(img,5,ctx,imgNoEditable);
-      console.log(document.getElementById("points").value);
+    });
+    document.getElementById("filtroDeteccionBordes").addEventListener("click", function(){
+      document.getElementById("points").style.display = "none";
+      document.getElementById("detectorBordes").style.display = "block";
+      document.getElementById("btnVerticales").style.boxShadow  = "4px 4px #888888";
+      pintarPixel(img,7,ctx,imgNoEditable);
+    });
+    document.getElementById("btnHorizontales").addEventListener("click", function(){
+      document.getElementById("btnHorizontales").style.boxShadow  = "4px 4px #888888";
+      document.getElementById("btnVerticales").style.boxShadow  = "none";
+
+      pintarPixel(img,6,ctx,imgNoEditable);
+    });
+    document.getElementById("btnVerticales").addEventListener("click", function(){
+      document.getElementById("btnHorizontales").style.boxShadow  = "none";
+      document.getElementById("btnVerticales").style.boxShadow  = "4px 4px #888888";
+
+      pintarPixel(img,7,ctx,imgNoEditable);
     });
 
-  //pinta los canvas de filtros
+    //pinta los canvas de filtros
     pintarPixel(img,1,ctxNegativo,imgNoEditable); // NEGATIVO
     pintarPixel(img,2,ctxGris,imgNoEditable); // ESCALA DE NEGROS
     pintarPixel(img,3,ctxSepia,imgNoEditable); // SEPIA
     pintarPixel(img,4,ctxBinario,imgNoEditable); // BINARIZACION
     pintarPixel(img,5,ctxBrillo,imgNoEditable); // BRILLO
-    // pintarPixel(imgNoEditable,6,ctx7); // DESENFOQUE
+    pintarPixel(img,6,ctxDetBordes,imgNoEditable); // DETECCION DE BORDES (por defecto el horizontales)
   };
 }
 
 //dibuja la imagen dada, ajustandola al tamaño del canvas dado
 function dibujarImg(contexto, imagen, x,y){
-  // contexto.drawImage(imagen,0,0,contexto.canvas.width,contexto.canvas.height); // hacer el reescalado a mano para no perder calidad
   contexto.drawImage(imagen,0,0,x,y);
 }
 //recorre el canvas q se le pasan,
 //y dependiendo el tipo de filtro q se le quiera aplicar,
 //sete la imagen enviada con dicho filtro
 function pintarPixel (imageData,tipo,contexto,imgNoEditable){
-  // var imagenAux = ctx.createImageData(imageData.width,imageData.height);
-  // copiarImg(imageData, imagenAux);
-  // var imgNoEditable = ctxNoEditable.getImageData(0, 0, this.width, this.height);
 
-  for (var eje_x = 0; eje_x < imageData.width; eje_x ++) {
-    for (var eje_y = 0; eje_y < imageData.height; eje_y ++) {
-      index = (eje_x + eje_y * imageData.width) * 4; // ese *4 es por el rgba, SI tambien cuenta el a, por mas q no lo pongas
+  if (tipo < 6) {
+    for (var eje_x = 0; eje_x < imageData.width; eje_x ++) {
+      for (var eje_y = 0; eje_y < imageData.height; eje_y ++) {
+        index = (eje_x + eje_y * imageData.width) * 4; // ese *4 es por el rgba, SI tambien cuenta el a, por mas q no lo pongas
 
-      switch (tipo) {
-        case 1: // NEGATIVO
-          imageData.data[index] = 255 - imgNoEditable.data[index]; //rojo
-          imageData.data[index+1] = 255 - imgNoEditable.data[index+1]; //verde
-          imageData.data[index+2] = 255 - imgNoEditable.data[index+2]; //azul
-          //imageData.data[index+3] = a; //opacidad (no hace falta porque esta en el maximo por defecto)
-        break;
-        case 2: // ESCALA DE NEGROS
-          imageData.data[index] = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
-          imageData.data[index+1] = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
-          imageData.data[index+2] = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
-        break;
-        case 3: // SEPIA
-          imageData.data[index] = 0.393 * imgNoEditable.data[index] + 0.769 * imgNoEditable.data[index+1] + 0.189 * imgNoEditable.data[index+2];
-          imageData.data[index+1] = 0.349 * imgNoEditable.data[index] + 0.686 * imgNoEditable.data[index+1] + 0.168 * imgNoEditable.data[index+2];
-          imageData.data[index+2] = 0.272 * imgNoEditable.data[index] + 0.534 * imgNoEditable.data[index+1] + 0.131 * imgNoEditable.data[index+2];
-        break;
-        case 4: // BINARIZACION
-          var escala_negra = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
-          var punto_medio = 128;
-          if (escala_negra >= punto_medio) {
-            imageData.data[index] = 0;
-            imageData.data[index+1] = 0;
-            imageData.data[index+2] = 0;
-          }else{
-            imageData.data[index] = 255;
-            imageData.data[index+1] = 255;
-            imageData.data[index+2] = 255;
-          }
-        break;
-        case 5: // BRILLO
-          var brillo_actual = parseInt(document.getElementById("points").value);
-          imageData.data[index] = imgNoEditable.data[index] + brillo_actual; //rojo
-          imageData.data[index+1] = imgNoEditable.data[index+1] + brillo_actual; //verde
-          imageData.data[index+2] = imgNoEditable.data[index+2] + brillo_actual; //azul
-        break;
-        // case 6: // DESENFOQUE
-        //   imageData.data[index] = imgNoEditable.data[index];
-        //   imageData.data[index+1] = imgNoEditable.data[index+1];
-        //   imageData.data[index+2] = imgNoEditable.data[index+2];
-        // break;
-        // deteccion de borders
-          // pasamos a gris para saber la luminancia con el escala de grices
-          //te paras en un pixel y preguntas y los lados y los de arribay los de abajo no son muuuy distintos ahi no es borde
-          // imagen[x-1,y] * m[0,1]+
-          // imagen[x+1,y] * m[2,1]
-          // matriz de combolucion
-          // cuenta<0 lo multiplicas por -1
-          //
-          // -1 | 0 | 1
-          // -1 | x | 1
-          // -1 | 0 | 1
-
-          // blur es la misma matriz pero con 1/9 en casa pos
-
-          // for x
-          //   for y
-          //     for k = x-1; k<x+1; k++
-          //       for l = y-1; l<y+1; l++
-          // carga el valor de "acumulador"
+        switch (tipo) {
+          case 1: // NEGATIVO
+            imageData.data[index] = 255 - imgNoEditable.data[index]; //rojo
+            imageData.data[index+1] = 255 - imgNoEditable.data[index+1]; //verde
+            imageData.data[index+2] = 255 - imgNoEditable.data[index+2]; //azul
+            //imageData.data[index+3] = a; //opacidad (no hace falta porque esta en el maximo por defecto)
+          break;
+          case 2: // ESCALA DE NEGROS
+            imageData.data[index] = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
+            imageData.data[index+1] = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
+            imageData.data[index+2] = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
+          break;
+          case 3: // SEPIA
+            imageData.data[index] = 0.393 * imgNoEditable.data[index] + 0.769 * imgNoEditable.data[index+1] + 0.189 * imgNoEditable.data[index+2];
+            imageData.data[index+1] = 0.349 * imgNoEditable.data[index] + 0.686 * imgNoEditable.data[index+1] + 0.168 * imgNoEditable.data[index+2];
+            imageData.data[index+2] = 0.272 * imgNoEditable.data[index] + 0.534 * imgNoEditable.data[index+1] + 0.131 * imgNoEditable.data[index+2];
+          break;
+          case 4: // BINARIZACION
+            var escala_negra = (imgNoEditable.data[index] + imgNoEditable.data[index+1] + imgNoEditable.data[index+2]) / 3;
+            var punto_medio = 128;
+            if (escala_negra >= punto_medio) {
+              imageData.data[index] = 0;
+              imageData.data[index+1] = 0;
+              imageData.data[index+2] = 0;
+            }else{
+              imageData.data[index] = 255;
+              imageData.data[index+1] = 255;
+              imageData.data[index+2] = 255;
+            }
+          break;
+          case 5: // BRILLO
+            var brillo_actual = parseInt(document.getElementById("points").value);
+            imageData.data[index] = imgNoEditable.data[index] + brillo_actual; //rojo
+            imageData.data[index+1] = imgNoEditable.data[index+1] + brillo_actual; //verde
+            imageData.data[index+2] = imgNoEditable.data[index+2] + brillo_actual; //azul
+          break;
+        }
       }
     }
   }
+  else {
+    var matriz = [[-1,-1,1],[-1,0,1],[-1,1,1]];
+
+    for (var x = 0; x < imgNoEditable.width; x ++) {
+      for (var y = 0; y < imgNoEditable.height; y ++) {
+        var index = (x + y * imgNoEditable.width) * 4;
+        //tambien se puede hacer con la img en blanco en negro para conseguir un solo color.
+        for (var j = x-1; j < x+1; j++) {
+          for (var k = y-1; k < y+1; k++) {
+            if (tipo == 6) { //DETECCION DE BORDES VERTICALES
+              imageData.data[index] = (imgNoEditable.data[index - (imgNoEditable.width * 4)] * matriz[1][0]) + (imgNoEditable.data[index + (imgNoEditable.width * 4)] * matriz[1][2]);
+              imageData.data[index+1] = (imgNoEditable.data[index - (imgNoEditable.width * 4) +1] * matriz[1][0]) + (imgNoEditable.data[index + (imgNoEditable.width * 4) +1] * matriz[1][2]);
+              imageData.data[index+2] = (imgNoEditable.data[index - (imgNoEditable.width * 4) +2] * matriz[1][0]) + (imgNoEditable.data[index + (imgNoEditable.width * 4) +2] * matriz[1][2]);
+            }
+            else if (tipo == 7) { //DETECCION DE BORDES HORIZONTALES
+              imageData.data[index] = (imgNoEditable.data[index - 4] * matriz[1][0]) + (imgNoEditable.data[index + 4] * matriz[1][2]);
+              imageData.data[index+1] = (imgNoEditable.data[index - 4] * matriz[1][0]) + (imgNoEditable.data[index + 4] * matriz[1][2]);
+              imageData.data[index+2] = (imgNoEditable.data[index - 4] * matriz[1][0]) + (imgNoEditable.data[index + 4] * matriz[1][2]);
+            }
+          }
+        }
+      }
+    }
+  }
+
   contexto.putImageData(imageData,0,0);
 }
 function copiarImg(original, copia){

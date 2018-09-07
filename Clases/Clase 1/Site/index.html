@@ -8,8 +8,9 @@
   <body>
     <!-- El nav general de la pag -->
     <div class="nav">
+      <a class="btnImagen" type="button" id="btnDescargar" onclick="descargarImg();" download="imagen.png">Descargar Img</a>
       <input type="file" id="file-input">
-      <a type="button" id="btnDescargar" onclick="descargarImg();" download="imagen.png">Descargar Img</a>
+      <label class="btnImagen" for="file-input">Elegir Imagen</label>
     </div>
     <!-- Menu lateral izquierdo donde se puede elegir que region mostrar en el 'panel' -->
     <div class="menu">
@@ -21,22 +22,27 @@
     <div class="panel">
       <!-- Region donde se muestran los mini canvas q tiene los filtros a aplicar al canvas general -->
       <div class="filtros" id="filtros">
+        <p>Negativo</p>
         <canvas class="canvansFiltros" id="filtroNegativo"></canvas>
+        <hr><p>Tonos de gris</p>
         <canvas class="canvansFiltros" id="filtroGris"></canvas>
+        <hr><p>Sepia</p>
         <canvas class="canvansFiltros" id="filtroSepia"></canvas>
+        <hr><p>Binario</p>
         <canvas class="canvansFiltros" id="filtroBinario"></canvas>
+        <hr><p>Brillo</p>
         <canvas class="canvansFiltros" id="filtroBrillo"></canvas>
-        <canvas class="canvansFiltros" id="filtroDesenfoque"></canvas>
-        <canvas class="canvansFiltros" id="filtroSaturacion"></canvas>
+        <hr><p>Deteccion de bordes</p>
+        <canvas class="canvansFiltros" id="filtroDeteccionBordes"></canvas>
       </div>
       <!-- Region donde se muestran las herramientas que tiene el paint -->
       <div class="paleta" id="paleta">
         <div class="tools">
           <div id="lapiz" onclick="setColorAnterior();">
-            lapiz
+            <img src="img/lapiz.png" alt="Lápiz">
           </div>
           <div id="goma" onclick="setearColor('#ffffff','g');">
-            goma
+            <img src="img/goma.png" alt="Goma de borrar">
           </div>
           <div class="tamaños">
             <div class="tamaño" onclick="setTamaño(2);" id="tam1">
@@ -70,30 +76,12 @@
     <div class="canvas">
       <canvas id="canvasMain"></canvas>
       <input type="range" name="points" id="points" value="0" min="-200" max="200">
+      <div id="detectorBordes">
+        <div id="btnVerticales">Bordes Verticales</div>
+        <div id="btnHorizontales">Bordes Horizontales</div>
+      </div>
       <canvas id="canvasNoEditable"></canvas>
     </div>
   </body>
   <script src="js/functions.js"></script>
 </html>
-
-<!-- Falta: -->
-  <!-- Nav -->
-    <!-- Logo -->
-  <!-- Menu -->
-    <!-- Config botones -->
-    <!-- Ajustar styles -->
-      <!-- Sombras on mouse over -->
-      <!-- color bton-->
-  <!-- Panel -->
-    <!-- Config tamaño width -->
-    <!-- Filtros -->
-      <!-- Cargar filtros con la img dada -->
-        <!-- No mostrar si no hay una? -->
-      <!-- Ver de darle estilos on mouse over -->
-    <!-- Paleta -->
-      <!-- Iconos -->
-      <!-- ver de hacer formas -->
-      <!-- Bton undo!? -->
-  <!-- Canvas -->
-    <!-- Ver la img por defecto -->
-<!-- Falta Algo mas?! -->
