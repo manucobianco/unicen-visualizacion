@@ -1,6 +1,6 @@
 /* --------- BODY --------- */
 body{
-  background-color: rgb(26, 5, 87);
+  background-color: #1f2024;
   margin: 0px;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -188,7 +188,7 @@ body{
 .canvas{
   width: 59%;
   height: 900px;
-  border: solid 1px white;
+  /* border: solid 1px white; */
   float: left;
   background-color: #1f2024;
 }
