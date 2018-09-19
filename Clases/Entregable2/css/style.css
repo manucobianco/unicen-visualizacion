@@ -1,0 +1,11 @@
+body{
+  background-color: rgb(47, 87, 93);
+}
+
+#canvasMain{
+  display: block;
+  margin: 20px auto auto auto;
+  border: solid 1px white;
+  width: 500px;
+  height: 500px;
+}
