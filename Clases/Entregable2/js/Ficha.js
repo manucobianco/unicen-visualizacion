@@ -1,16 +1,17 @@
 class Ficha {
-  constructor(id) {
-    this.width = 20;
-    this.height = 20;
-    this.radio = 10;
+  constructor(jugador,id) {
+    this.canvas = document.getElementById('canvasMain');
+    this.ctx = canvas.getContext('2d');
+    this.jugador = jugador;
+    this.radio = 5;
     this.id = id;
-    this.color = "rgb(226, 21, 205)";
-    this.pintar(document.getElementById('canvasMain').getContext('2d'),50,50);
+    // this.pintar(document.getElementById('canvasMain').getContext('2d'),50,50);
   }
 
-  pintar(ctx,posX,posY){
+  dibujar(ctx,posX,posY){
     console.log('X: '+posX+"| Y: "+posY);
     ctx.beginPath();
+    ctx.fillStyle = this.getRandomColor();
     ctx.arc(posX,posY,this.radio,0,Math.PI * 2);
     ctx.fill();
     ctx.closePath();
@@ -18,5 +19,14 @@ class Ficha {
 
   getId(){
     return this.id;
+  }
+
+    getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 }
