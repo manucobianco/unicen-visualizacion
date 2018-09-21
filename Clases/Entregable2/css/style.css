@@ -5,6 +5,5 @@ body{
 #canvasMain{
   display: block;
   border: solid 1px white;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 50px auto auto auto;
 }
