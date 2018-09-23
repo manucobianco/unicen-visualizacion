@@ -11,34 +11,39 @@ var fichaActual;
 
 
 canvas.onmousemove = function (e){
+  console.log('X: '+e.layerX+"| Y: "+e.layerY);
   if (clicked) {
     var x = e.layerX;
     var y = e.layerY;
 
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    tablero.dibujar();
     fichaActual.dibujar(ctx,x,y);
     j1.pintar(jugadorActual.getNombre());
     j2.pintar(jugadorActual.getNombre());
-
-
-
-
-    // console.log('X: '+=e.layerX+"| Y: "+e.layerY);
   }
 }
 canvas.onmousedown = function(e){
   if (canGetFicha(jugadorActual.getNombre(),e.layerX,e.layerY)) {
-    console.log(jugadorActual.getCantFichas());
+    // console.log(jugadorActual.getCantFichas());
     clicked = true;
     fichaActual = jugadorActual.getFicha();
   }
 }
 canvas.onmouseup = function(e){
-  clicked = false;
-  fichaActual = null;
-  j1 = [j2, j2=j1][0];//toggle entre jugadores
-  jugadorActual = j1;
+  if(clicked){
+    if (tablero.add(e.layerX,fichaActual)) {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      tablero.dibujar();
+      j1.pintar(jugadorActual.getNombre());
+      j2.pintar(jugadorActual.getNombre());
+      clicked = false;
+      fichaActual = null;
+      j1 = [j2, j2=j1][0];//toggle entre jugadores
+      jugadorActual = j1;
+    }
+  }
 }
 
 function canGetFicha(jugador,x,y){
