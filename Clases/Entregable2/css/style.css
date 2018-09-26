@@ -1,9 +1,44 @@
 body{
-  background-color: rgb(47, 87, 93);
+  background-color: #2f3237;
+  margin:0px;
+  font-family: Arial;
+}
+
+#contenedorCanvas{
+  width: 100%;
+  left: 0px;
+  right: 0px;
+  background-color: black;
+  margin: 0px;
 }
 
 #canvasMain{
   display: block;
-  border: solid 1px white;
-  margin: 50px auto auto auto;
+  margin: auto auto auto auto;
+  background-color: rgb(29, 29, 29) !important;
+}
+
+#jugadores{
+  width: 1000px;
+  height: 40px;
+  display: flex;
+  margin: auto auto auto auto;
+}
+
+.jugador{
+  color: white;
+}
+
+#J1{
+  margin: auto auto auto 70px;
+}
+
+#J2{
+  margin: auto 70px auto auto;
+}
+
+#ganador{
+  display: none;
+  margin: auto auto auto auto;
+  color: white;
 }

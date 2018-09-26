@@ -5,14 +5,14 @@ class Ficha {
     this.jugador = jugador;
     this.radio = 30;
     this.id = id;
+    this.ruta="";
     if (jugador == 'j1') {
-      this.color= "rgb(157, 223, 255)";
+      this.ruta = "./img/imagen_jugador1.png";
     }else if (jugador == 'j2') {
-      this.color = "rgb(217, 180, 211)";
-    }else if (jugador == 'base') {
-      this.color = "rgb(47, 87, 93)";
+      this.ruta = "./img/imagen_jugador2.png";
     }
-    // this.pintar(document.getElementById('canvasMain').getContext('2d'),50,50);
+    this.color = "rgb(29, 29, 29)";
+    // this.pintar(document.getElementById('canvasMain').getContext('2d'),50,50
   }
 
   dibujar(ctx,posX,posY){
@@ -21,18 +21,29 @@ class Ficha {
     ctx.arc(posX,posY,this.radio,0,Math.PI * 2);
     ctx.fill();
     ctx.closePath();
+    if (this.ruta!="") {
+      var img = new Image();
+      img.src = this.ruta;
+      // img.onload = function() { //tilda todo
+      ctx.drawImage(img,posX-this.radio,posY-this.radio,60,60);
+      // }
+    }
   }
 
   getNombre(){
     return this.jugador;
   }
-  //
-  // getRandomColor() {
-  //   var letters = '0123456789ABCDEF';
-  //   var color = '#';
-  //   for (var i = 0; i < 6; i++) {
-  //     color += letters[Math.floor(Math.random() * 16)];
-  //   }
-  //   return color;
-  // }
+
+  ganadora(){
+    this.ruta="";
+    this.color = "rgb(204, 215, 4)";
+  }
+
+  start(ctx,posX,posY){
+    var img = new Image();
+    img.src = this.ruta;
+    img.onload = function() {
+      ctx.drawImage(img,posX-this.radio,posY-this.radio,60,60);
+    }
+  }
 }
