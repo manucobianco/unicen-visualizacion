@@ -8,8 +8,8 @@ var jugadorActual = j1;
 document.getElementById('J1').style.color = "#1a943f";
 var fichaActual;
 
-setTimeout(function(){ j1.pintar(jugadorActual.getNombre()); }, 1);// cargarn la primera ficha
-setTimeout(function(){ j2.pintar(jugadorActual.getNombre()); }, 1);// cargarn la primera ficha
+setTimeout(function(){ j1.pintar(jugadorActual.getNombre()); }, 1000);// cargarn la primera ficha
+setTimeout(function(){ j2.pintar(jugadorActual.getNombre()); }, 1000);// cargarn la primera ficha
 
 canvas.onmousemove = function (e){
   // console.log('X: '+(e.clientX-canvas.getBoundingClientRect().left)+"| Y: "+(e.clientY-canvas.getBoundingClientRect().top));
